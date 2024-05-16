@@ -1,4 +1,6 @@
 # This project
+*~
+*.swp
 src
 archive-cache
 skbuild

@@ -95,7 +95,7 @@ if(ITKPythonPackage_SUPERBUILD)
   set(ITK_REPOSITORY "https://github.com/InsightSoftwareConsortium/ITK.git")
 
   # master branch, 2024-04-15
-  set(ITK_GIT_TAG "2082a9364a204cd93b9db082ee651aae096016c7")
+  set(ITK_GIT_TAG "master")
 
   #-----------------------------------------------------------------------------
   # A separate project is used to download ITK, so that it can reused
@@ -150,10 +150,10 @@ if(ITKPythonPackage_SUPERBUILD)
 
     set(ITK_SOURCE_DIR ${CMAKE_BINARY_DIR}/ITK)
 
+      #GIT_TAG ${ITK_GIT_TAG}
     ExternalProject_add(ITK-source-download
       SOURCE_DIR ${ITK_SOURCE_DIR}
       GIT_REPOSITORY ${ITK_REPOSITORY}
-      GIT_TAG ${ITK_GIT_TAG}
       USES_TERMINAL_DOWNLOAD 1
       CONFIGURE_COMMAND ""
       BUILD_COMMAND ""
