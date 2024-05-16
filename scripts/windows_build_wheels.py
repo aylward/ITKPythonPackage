@@ -83,8 +83,10 @@ def build_wrapped_itk(
             "-DITK_LEGACY_SILENT:BOOL=ON",
             "-DITK_WRAP_PYTHON:BOOL=ON",
             "-DITK_WRAP_DOC:BOOL=ON",
-            "-DDOXYGEN_EXECUTABLE:FILEPATH=C:/P/doxygen/doxygen.exe",
+            "-DDOXYGEN_DOT_EXECUTABLE:FILEPATH=C:/P/Graphviz/bin/dot.exe",
+            "-DDOXYGEN_EXECUTABLE:FILEPATH=C:/P/doxygen/bin/doxygen.exe",
             "-DModule_ITKTBB:BOOL=ON",
+            "-DModule_TubeTK:BOOL=ON",
             "-DTBB_DIR:PATH=%s" % tbb_dir,
             "-G", "Ninja",
             source_path
@@ -142,7 +144,9 @@ def build_wheel(python_version, build_type="Release", single_wheel=False,
                 "--config-setting=cmake.define.Python3_INCLUDE_DIR:PATH=%s" % python_include_dir,
                 "--config-setting=cmake.define.Python3_INCLUDE_DIRS:PATH=%s" % python_include_dir,
                 "--config-setting=cmake.define.Python3_LIBRARY:FILEPATH=%s" % python_library,
-                "--config-setting=cmake.define.DOXYGEN_EXECUTABLE:FILEPATH=C:/P/doxygen/doxygen.exe",
+                "--config-setting=cmake.define.DOXYGEN_DOT_EXECUTABLE:FILEPATH=C:/P/Graphviz/bin/dot.exe",
+                "--config-setting=cmake.define.DOXYGEN_EXECUTABLE:FILEPATH=C:/P/doxygen/bin/doxygen.exe",
+                "--config-setting=cmake.define.Module_TubeTK:BOOL=ON",
             ] + [o.replace('-D', '--config-setting=cmake.define.') for o in cmake_options] + ['.',])
 
         else:
@@ -184,7 +188,10 @@ def build_wheel(python_version, build_type="Release", single_wheel=False,
                     "--config-setting=cmake.define.Python3_EXECUTABLE:FILEPATH=%s" % python_executable,
                     "--config-setting=cmake.define.Python3_INCLUDE_DIR:PATH=%s" % python_include_dir,
                     "--config-setting=cmake.define.Python3_INCLUDE_DIRS:PATH=%s" % python_include_dir,
-                    "--config-setting=cmake.define.Python3_LIBRARY:FILEPATH=%s" % python_library
+                    "--config-setting=cmake.define.Python3_LIBRARY:FILEPATH=%s" % python_library,
+                    "--config-setting=cmake.define.DOXYGEN_DOT_EXECUTABLE:FILEPATH=C:/P/Graphviz/bin/dot.exe",
+                    "--config-setting=cmake.define.DOXYGEN_EXECUTABLE:FILEPATH=C:/P/doxygen/bin/doxygen.exe",
+                    "--config-setting=cmake.define.Module_TubeTK:BOOL=ON",
                 ] + [o.replace('-D', '--config-setting=cmake.define.') for o in cmake_options] + ['.',])
 
         # Remove unnecessary files for building against ITK
