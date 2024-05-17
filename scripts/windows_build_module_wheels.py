@@ -99,6 +99,8 @@ def build_wheels(py_envs=DEFAULT_PY_ENVS, cleanup=True, cmake_options=[]):
                     "--config-setting=cmake.define.Python3_INCLUDE_DIRS:PATH=%s" % python_include_dir,
                     "--config-setting=cmake.define.Python3_LIBRARY:FILEPATH=%s" % python_library,
                     "--config-setting=cmake.define.Python3_SABI_LIBRARY:FILEPATH=%s" % python_library,
+                    "--config-setting=cmake.define.DOXYGEN_DOT_EXECUTABLE:FILEPATH=C:/P/Graphviz/bin/dot.exe",
+                    "--config-setting=cmake.define.DOXYGEN_EXECUTABLE:FILEPATH=C:/P/doxygen/bin/doxygen.exe",
                 ] + [o.replace('-D', '--config-setting=cmake.define.') for o in cmake_options] + ['.',])
             else:
                 # scikit-build classic
@@ -119,7 +121,9 @@ def build_wheels(py_envs=DEFAULT_PY_ENVS, cleanup=True, cmake_options=[]):
                     "-DPython3_EXECUTABLE:FILEPATH=%s" % python_executable,
                     "-DPython3_INCLUDE_DIR:PATH=%s" % python_include_dir,
                     "-DPython3_INCLUDE_DIRS:PATH=%s" % python_include_dir,
-                    "-DPython3_LIBRARY:FILEPATH=%s" % python_library
+                    "-DPython3_LIBRARY:FILEPATH=%s" % python_library,
+                    "-DDOXYGEN_DOT_EXECUTABLE:FILEPATH=C:/P/Graphviz/bin/dot.exe",
+                    "-DDOXYGEN_EXECUTABLE:FILEPATH=C:/P/doxygen/bin/doxygen.exe",
                 ] + cmake_options)
                 # Cleanup
                 if cleanup:
