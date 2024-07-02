@@ -50,7 +50,7 @@ def build_wheels(py_envs=DEFAULT_PY_ENVS, cleanup=True, cmake_options=[]):
                 use_scikit_build_core = False
 
             # Install dependencies
-            check_call([pip, "install", "pip", "--upgrade"])
+            check_call([python_executable, "-m", "pip", "install", "pip", "--upgrade"])
             requirements_file = os.path.join(ROOT_DIR, "requirements-dev.txt")
             if os.path.exists(requirements_file):
                 check_call([pip, "install", "--upgrade", "-r", requirements_file])
@@ -156,12 +156,13 @@ def rename_wheel_init(py_env, filepath):
     shutil.rmtree(wheel_dir)
 
 def fixup_wheel(py_envs, filepath, lib_paths:str='', exclude_libs:str=''):
-    lib_paths = ';'.join(["C:/P/IPP/oneTBB-prefix/bin",lib_paths.strip()]).strip(';')
+    lib_paths = ';'.join(["C:/IPP/oneTBB-prefix/bin",lib_paths.strip()]).strip(';')
     print(f'Library paths for fixup: {lib_paths}')
 
     py_env = py_envs[0]
 
-    delve_wheel = os.path.join("C:/P/IPP", "venv-" + py_env, "Scripts", "delvewheel.exe")
+    delve_wheel = os.path.join("C:/IPP", "venv-" + py_env, "Scripts", "delvewheel.exe")
+    print(delve_wheel, lib_paths, exclude_libs, ROOT_DIR, filepath)
     check_call([delve_wheel, "repair", "--no-mangle-all", "--add-path",
         lib_paths, "--no-dll", exclude_libs, "--ignore-in-wheel", "-w",
         os.path.join(ROOT_DIR, "dist"), filepath])
