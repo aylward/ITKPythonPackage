@@ -203,7 +203,7 @@ def build_wheel(python_version, build_type="Release", single_wheel=False,
 
 def fixup_wheel(py_envs, filepath, lib_paths:str=''):
     lib_paths = lib_paths.strip() if lib_paths.isspace() else lib_paths.strip() + ";"
-    lib_paths += "C:/P/IPP/oneTBB-prefix/bin"
+    lib_paths += "C:/IPP/oneTBB-prefix/bin"
     print(f'Library paths for fixup: {lib_paths}')
 
     py_env = py_envs[0]
