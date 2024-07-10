@@ -1,3 +1,38 @@
+# Build new wheels for Linux
+
+## Prep
+
+Join the docker group so that you can run docker without using sudo.
+
+## Env Vars
+
+set the following
+
+    export ITK_MODULE_NO_CLEANUP=1
+
+## Build ITK
+
+Get scripts
+
+    git clone https://github.com/aylward/ITKPythonPackage
+    cd ITKPythonPackage
+    git pull --all
+    git checkout aylward20240712  
+
+* Or checkout whatever is the appropriate version
+
+* Or checkout, update itkVersion, commit, push, and tag
+
+    vi itkVersion
+    git tag <newtag>
+    git push aylward <newtag>
+
+On github site verify new tag.
+    
+Build ITK for cp310
+
+    ./scripts/dockcross-manylinux-build-wheels.sh cp310
+
 # Build new wheels for Windows
 
 ## In Bash:

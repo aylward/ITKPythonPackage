@@ -19,13 +19,13 @@
 
 # ITKPythonBuilds archive tag to use for ITK build artifacts.
 #   See https://github.com/insightSoftwareConsortium/ITKpythonbuilds for available tags.
-ITK_PACKAGE_VERSION=${ITK_PACKAGE_VERSION:=v5.4.0}
+ITK_PACKAGE_VERSION=${ITK_PACKAGE_VERSION:=aylward20240712}
 
 # Github organization for fetching ITKPythonPackage build scripts
-ITKPYTHONPACKAGE_ORG=${ITKPYTHONPACKAGE_ORG:=InsightSoftwareConsortium}
+ITKPYTHONPACKAGE_ORG=${ITKPYTHONPACKAGE_ORG:=aylward}
 
 # ITKPythonPackage tag for fetching build scripts
-ITKPYTHONPACKAGE_TAG=${ITKPYTHONPACKAGE_TAG:=master}
+ITKPYTHONPACKAGE_TAG=${ITKPYTHONPACKAGE_TAG:=aylward20240712}
 
 ########################################################################
 # Docker image parameters
