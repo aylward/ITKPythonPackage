@@ -33,6 +33,52 @@ Build ITK for cp310
 
     ./scripts/dockcross-manylinux-build-wheels.sh cp310
 
+## Build dependent modules
+
+    git clone https://github.com/InsightSoftwareConsortium/ITKMinimalPathExtraction
+
+Don't forget to set the env variables and use the same python venv
+
+Copy necessary directories from ITK
+
+    cd ITKMinimalPathExtracction
+    cp -r ../ITK-source .
+    cp -r ../ITK-cp310* .
+    cp -r ../oneTBB-prefix .
+    export TBB_DIR='/work/oneTBB-prefix/lib/cmake/TBB/'
+
+### Update version
+
+    vi pyproject.toml  # append date to version number
+
+### Build it
+
+    ../scripts/dockcross-manylinux-build-module-wheels.sh cp310
+
+## Build TubeTK module
+
+There must be a simpler way, but here is what I found that works...
+
+### Copy build from ITKMinimalPathExtraction to ITKTubeTK
+
+    cd src/wheels/ITKPythonPackage
+    git clone https://github.com/InsightSoftwareConsortium/ITKTubeTK
+    cp -r ITKMinimalPathExtraction ITKTubeTK
+    cp -r ITKMinimalPathExtraction/dist/ ITKTubeTK
+    cp dist/* ITKTubeTK/dist
+    cp -r ITKMinimalPathExtraction/ITK-source ITKTubeTK
+    cp -r ITKMinimalPathExtraction/oneTBB-prefix ITKTubeTK
+    cp -r ITKMinimalPathExtraction/ITK-cp310* ITKTubeTK
+
+### Set env vars
+
+    cd ITKTubeTK
+    export ITK_MODULE_PREQ='InsightSoftwareConsortium/ITKMinimalPathExtraction@master'
+    ../scripts/dockcross-manylinux-build-module-wheels.sh cp310
+
+## Upload to TestPyPi
+    twine upload --repository testpypi dist/*
+
 # Build new wheels for Windows
 
 ## In Bash:
