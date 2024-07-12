@@ -55,7 +55,7 @@ $pythonVersion = "3.$python_version_minor"
 echo "Pulling Python $pythonVersion-x$pythonArch"
 iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/scikit-build/scikit-ci-addons/master/windows/install-python.ps1'))
 
-if (-not $env:ITK_PACKAGE_VERSION) { $env:ITK_PACKAGE_VERSION = 'v5.3.0' }
+if (-not $env:ITK_PACKAGE_VERSION) { $env:ITK_PACKAGE_VERSION = 'v5.4.0' }
 echo "Fetching build archive $env:ITK_PACKAGE_VERSION"
 if (Test-Path C:\P) {
   Remove-Item -Recurse -Force C:\P
@@ -104,7 +104,7 @@ if ("$setup_options".length -gt 0) {
   $build_command = "$build_command $setup_options"
 }
 if("$cmake_options".length -gt 0) {
-  $build_command = "$build_command -- `"$cmake_options`""
+  $build_command = "$build_command -- $cmake_options"
 }
 echo $build_command
 
