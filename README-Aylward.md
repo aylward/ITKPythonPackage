@@ -23,9 +23,14 @@ Get scripts
 
 * Or checkout, update itkVersion, commit, push, and tag
 
-    vi itkVersion
-    git tag <newtag>
-    git push aylward <newtag>
+    cd ITK-source/ITK
+    git pull --all
+    cd ../..
+    vi itkVersion pyproject.toml
+    git checkout -b bump<date>
+    git commit -a
+    git tag aylward<date>
+    git push aylward aylward<date>
 
 On github site verify new tag.
     
