@@ -17,7 +17,7 @@ Get scripts
     git clone https://github.com/aylward/ITKPythonPackage
     cd ITKPythonPackage
     git pull --all
-    git checkout aylward20240712  
+    git checkout aylward20240807
 
 * Or checkout whatever is the appropriate version
 
@@ -26,7 +26,7 @@ Get scripts
     cd ITK-source/ITK
     git pull --all
     cd ../..
-    vi itkVersion pyproject.toml
+    vi itkVersion
     git checkout -b bump<date>
     git commit -a
     git tag aylward<date>
@@ -50,6 +50,11 @@ Copy necessary directories from ITK
     cp -r ../ITK-source .
     cp -r ../ITK-cp310* .
     cp -r ../oneTBB-prefix .
+    cp -r ../dist .
+
+### Set env variables
+
+    export ITK_MODULE_NO_CLEANUP=1
     export TBB_DIR='/work/oneTBB-prefix/lib/cmake/TBB/'
 
 ### Update version
@@ -78,7 +83,16 @@ There must be a simpler way, but here is what I found that works...
 ### Set env vars
 
     cd ITKTubeTK
+    export ITK_MODULE_NO_CLEANUP=1
+    export TBB_DIR='/work/oneTBB-prefix/lib/cmake/TBB/'
     export ITK_MODULE_PREQ='InsightSoftwareConsortium/ITKMinimalPathExtraction@master'
+
+### Update version
+
+    vi CMakeLists.txt pyproject.toml
+
+### Build it
+
     ../scripts/dockcross-manylinux-build-module-wheels.sh cp310
 
 ## Upload to TestPyPi
